@@ -18,6 +18,16 @@ echo "Cloning the xmonad  and the xmonad-contrib repos"
 git clone https://github.com/xmonad/xmonad ~/.config/xmonad/xmonad
 git clone https://github.com/xmonad/xmonad-contrib ~/.config/xmonad/xmonad-contrib
 
+echo "Linking ~/.local/bin/xmonad to /usr/bin/xmonad"
+sudo ln -s ~/.local/bin/xmonad /usr/bin/
+echo "Creating xsessions entry"
+echo "[Desktop Entry]" >> ~/xmonad.desktop
+echo "Name = XMonad" >> ~/xmonad.desktop
+echo "Exec = xmonad" >> ~/xmonad.desktop
+echo "Type = Xsession" >> ~/xmonad.desktop
+sudo mv ~/xmonad.desktop /usr/share/xsessions/
+
+
 echo "Downloading and setting up stack" 
 curl -sSL https://get.haskellstack.org | sh
 stack setup
@@ -27,14 +37,6 @@ stack init
 echo "Installing everything"
 stack install
 
-echo "Linking ~/.local/bin/xmonad to /usr/bin/xmonad"
-sudo ln -s ~/.local/bin/xmonad /usr/bin/
-echo "Creating xsessions entry"
-echo "[Desktop Entry]" >> ~/xmonad.desktop
-echo "Name = XMonad" >> ~/xmonad.desktop
-echo "Exec = xmonad" >> ~/xmonad.desktop
-echo "Type = Xsession" >> ~/xmonad.desktop
-sudo mv ~/xmonad.desktop /usr/share/xsessions/
 echo "Done"
 
 
