@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 echo "Installing dependencies" 
-sudo zypper in zsh neovim git \
+sudo zypper -n in zsh neovim git \
     gcc make libffi-devel zlib-devel gmp-devel \
     libX11-devel libXft-devel libXinerama-devel libXrandr-devel libXss-devel 
 echo "Creating ~/.local/bin and adding it to PATH"
