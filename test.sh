@@ -1,14 +1,21 @@
 #!/usr/bin/env sh
 
+
+echo "Downloading and setting up stack" 
+curl -sSL https://get.haskellstack.org | sh
+
 echo "Installing dependencies" 
 sudo zypper -n in zsh neovim git \
     gcc make libffi-devel zlib-devel gmp-devel \
-    libX11-devel libXft-devel libXinerama-devel libXrandr-devel libXss-devel 
+    libX11-devel libXft-devel libXinerama-devel libXrandr-devel libXss-devel
+
 echo "Creating ~/.local/bin and adding it to PATH"
 mkdir ~/.local/bin
+
 echo "adding $HOME/.local/bin to PATH"
 PATH="$HOME/.local/bin:$PATH"
 echo $PATH
+
 echo "Creating ~/.config/xmonad/ and writing a basic xmonad.hs"
 mkdir -p ~/.config/xmonad
 echo "import XMonad" >> ~/.config/xmonad/xmonad.hs
@@ -28,8 +35,7 @@ echo "Type = Xsession" >> ~/xmonad.desktop
 sudo mv ~/xmonad.desktop /usr/share/xsessions/
 
 
-echo "Downloading and setting up stack" 
-curl -sSL https://get.haskellstack.org | sh
+
 stack setup
 echo "Moving into ~/.config/xmonad/ and initiating stack"
 cd ~/.config/xmonad
