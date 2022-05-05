@@ -14,7 +14,7 @@ mkdir ~/.local/bin
 
 echo "Adding $HOME/.local/bin to PATH"
 if [ "$SHELL" == "/usr/bin/zsh" ]; then
-	echo 'PATH="$HOME/.local/bin:$PATH"' >> $ZDOTDIR/.zshrc
+	echo 'PATH="$HOME/.local/bin:$PATH"' >> $HOME/.zshrc
 elif [ "$SHELL" == "/usr/bin/bash" ]; then
 	echo 'PATH="$HOME/.local/bin:$PATH"' >> $HOME/.bashrc
 fi
