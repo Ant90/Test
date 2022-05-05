@@ -12,15 +12,21 @@ sudo zypper -n in zsh neovim git \
 echo "Creating ~/.local/bin and adding it to PATH"
 mkdir ~/.local/bin
 
-echo "adding $HOME/.local/bin to PATH"
-PATH="$HOME/.local/bin:$PATH"
+echo "Adding $HOME/.local/bin to PATH"
+if [ "$SHELL" == "/usr/bin/zsh" ]; then
+	echo 'PATH="$HOME/.local/bin:$PATH"' >> $ZDOTDIR/.zshrc
+elif [ "$SHELL" == "/usr/bin/bash" ]; then
+	echo 'PATH="$HOME/.local/bin:$PATH"' >> $HOME/.bashrc
+fi
 echo $PATH
 
 echo "Creating ~/.config/xmonad/ and writing a basic xmonad.hs"
 mkdir -p ~/.config/xmonad
-echo "import XMonad" >> ~/.config/xmonad/xmonad.hs
-echo "" >> ~/.config/xmonad/xmonad.hs
-echo "main = xmonad def" >> ~/.config/xmonad/xmonad.hs
+if [ ! -e ~/.config/xmonad/xmonad.hs ]; then
+	echo "import XMonad" >> ~/.config/xmonad/xmonad.hs
+	echo "" >> ~/.config/xmonad/xmonad.hs
+	echo "main = xmonad def" >> ~/.config/xmonad/xmonad.hs
+fi
 echo "Cloning the xmonad  and the xmonad-contrib repos"
 git clone https://github.com/xmonad/xmonad ~/.config/xmonad/xmonad
 git clone https://github.com/xmonad/xmonad-contrib ~/.config/xmonad/xmonad-contrib
@@ -44,10 +50,3 @@ echo "Installing everything"
 stack install
 
 echo "Done"
-
-
-
-
-
-
-
