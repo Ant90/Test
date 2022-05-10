@@ -15,7 +15,7 @@ mkdir ~/.local/bin
 echo "Adding $HOME/.local/bin to PATH"
 if [ "$SHELL" == "/usr/bin/zsh" ]; then
 	echo 'PATH="$HOME/.local/bin:$PATH"' >> $HOME/.zshrc
-elif [ "$SHELL" == "/usr/bin/bash" ]; then
+elif [ "$SHELL" == "/bin/bash" ]; then
 	echo 'PATH="$HOME/.local/bin:$PATH"' >> $HOME/.bashrc
 fi
 echo $PATH
@@ -31,8 +31,6 @@ echo "Cloning the xmonad  and the xmonad-contrib repos"
 git clone https://github.com/xmonad/xmonad ~/.config/xmonad/xmonad
 git clone https://github.com/xmonad/xmonad-contrib ~/.config/xmonad/xmonad-contrib
 
-echo "Linking ~/.local/bin/xmonad to /usr/bin/xmonad"
-sudo ln -s ~/.local/bin/xmonad /usr/bin/
 echo "Creating xsessions entry"
 echo "[Desktop Entry]" >> ~/xmonad.desktop
 echo "Name = XMonad" >> ~/xmonad.desktop
@@ -40,13 +38,15 @@ echo "Exec = xmonad" >> ~/xmonad.desktop
 echo "Type = Xsession" >> ~/xmonad.desktop
 sudo mv ~/xmonad.desktop /usr/share/xsessions/
 
-
-
 stack setup
 echo "Moving into ~/.config/xmonad/ and initiating stack"
 cd ~/.config/xmonad
 stack init
 echo "Installing everything"
 stack install
+echo "Linking ~/.local/bin/xmonad to /usr/bin/xmonad"
+sudo ln -s ~/.local/bin/xmonad /usr/bin/
+
+
 
 echo "Done"
