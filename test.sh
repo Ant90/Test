@@ -1,16 +1,7 @@
 #!/usr/bin/env sh
 
-
-echo "Downloading and setting up stack" 
-curl -sSL https://get.haskellstack.org | sh
-
-echo "Installing dependencies" 
-sudo zypper -n in zsh neovim git \
-    gcc make libffi-devel zlib-devel gmp-devel \
-    libX11-devel libXft-devel libXinerama-devel libXrandr-devel libXss-devel
-
 echo "Creating ~/.local/bin and adding it to PATH"
-mkdir ~/.local/bin
+mkdir -p ~/.local/bin
 
 echo "Adding $HOME/.local/bin to PATH"
 if [ "$SHELL" == "/usr/bin/zsh" ]; then
@@ -19,6 +10,14 @@ elif [ "$SHELL" == "/bin/bash" ]; then
 	echo 'PATH="$HOME/.local/bin:$PATH"' >> $HOME/.bashrc
 fi
 echo $PATH
+
+echo "Downloading and setting up stack" 
+curl -sSL https://get.haskellstack.org | sh
+
+echo "Installing dependencies" 
+sudo zypper -n in zsh neovim git \
+    gcc make libffi-devel zlib-devel gmp-devel \
+    libX11-devel libXft-devel libXinerama-devel libXrandr-devel libXss-devel
 
 echo "Creating ~/.config/xmonad/ and writing a basic xmonad.hs"
 mkdir -p ~/.config/xmonad
